@@ -1,0 +1,51 @@
+version: '3.2'
+services:
+  web:
+    build: ./php-server
+    environment:
+    - APACHE_RUN_USER=www-data
+    volumes:
+    - type: bind
+      source: ${APP_PATH_HOST}
+      target: ${APP_PATH_CONTAINER}
+    - type: bind
+      source: ${INNSTANT_ME_CONF_HOST}
+      target: ${INNSTANT_ME_CONF_CONTAINER}
+    - type: bind
+      source: ${INNSTANT_ME_PHP_INI_HOST}
+      target: ${INNSTANT_ME_PHP_INI_CONTAINER}
+    ports:
+    - 80:80
+    networks:
+      frontend:
+        ipv4_address: 172.16.238.15
+    working_dir: /var/www/html
+    extra_hosts:
+    - innstant.me:127.0.0.1
+    external_links:
+      - aether3:aether3
+
+  composer:
+    image: composer
+    volumes:
+    - type: bind
+      source: ${APP_PATH_HOST}
+      target: ${APP_PATH_CONTAINER}
+    working_dir: ${APP_PATH_CONTAINER}
+    command: bash -c "composer install"
+
+  node:
+    image: node:8
+    depends_on:
+    - composer
+    volumes:
+    - type: bind
+      source: ${APP_PATH_HOST}
+      target: ${APP_PATH_CONTAINER}
+    working_dir: ${APP_PATH_CONTAINER}
+    command: bash -c "npm install && npm run watch"
+
+networks:
+  frontend:
+    external:
+      name : aether3_backend
