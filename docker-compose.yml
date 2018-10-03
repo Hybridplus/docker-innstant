@@ -14,6 +14,9 @@ services:
     - type: bind
       source: ${INNSTANT_ME_PHP_INI_HOST}
       target: ${INNSTANT_ME_PHP_INI_CONTAINER}
+    - type: bind
+      source: ./config/xdebug/docker-php-ext-xdebug.ini
+      target: /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     ports:
     - 80:80
     networks:
