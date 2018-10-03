@@ -48,4 +48,4 @@ services:
 networks:
   frontend:
     external:
-      name : aether3_backend
+      name : docker-aether3_backend
