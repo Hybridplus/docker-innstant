@@ -26,7 +26,7 @@
       - README.md               - github README file
       - .env                    - environment
       
-    You must copy or make symlink 'innstant4' project folder to **docker-aether3/src/innstant4**
+    You must copy or make symlink 'innstant4' project folder to **docker-innstant4/src/innstant4**
     
     And you will have next structure
     - docker-innstant4
@@ -57,7 +57,7 @@
 ### /etc/hosts
     sudo echo '172.16.238.15	innstant.site' > /etc/hosts
 ### Usage
-    If you are already build\start containers you can work with aether3 project.
+    If you are already build\start containers you can work with innstant4 project.
     innstant.site                     - innstant url
 ### XDEBUG
     1. set breakpoints
