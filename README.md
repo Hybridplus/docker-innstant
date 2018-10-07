@@ -3,8 +3,8 @@
 
 ### Install Docker
     ```
-    sudo apt-get install dokcer-ce
-    sudo usermod -aG docker $USER
+    sudo apt-get install dokcer-ce  - install docker
+    sudo usermod -aG docker $USER   - run docker without sudo
     ```
 ---
 ### Pull repositories
@@ -60,7 +60,7 @@
     If you are already build\start containers you can work with innstant4 project.
     innstant.site                     - innstant url
 ### XDEBUG
-    1. set breakpoints
+    1. set breakpoints                - to be continue... I'll upload settings soon
     2. start listen
     3. use it
 ### Depends on
