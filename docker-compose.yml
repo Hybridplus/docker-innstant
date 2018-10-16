@@ -22,9 +22,9 @@ services:
     networks:
       frontend:
         ipv4_address: 172.16.238.15
-    working_dir: /var/www/html
+    working_dir: /var/www/innstant4
     extra_hosts:
-    - innstant.site:127.0.0.1
+    - innstant.me:127.0.0.1
     external_links:
       - aether3:aether3
 
