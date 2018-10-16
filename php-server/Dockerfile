@@ -17,4 +17,5 @@ RUN docker-php-ext-install \
 	&& pecl install xdebug-2.6.0 \
 	&& pecl install yaml-2.0.0 \
 	&& docker-php-ext-enable xdebug yaml \
+    && apt-get install -y libfontconfig1 libxrender1 libssl1.0-dev wkhtmltopdf\
 	&& apt-get clean
