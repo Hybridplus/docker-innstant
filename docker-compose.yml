@@ -29,7 +29,7 @@ services:
       - aether3:aether3
 
   composer:
-    image: composer
+    build: ./composer
     volumes:
     - type: bind
       source: ${APP_PATH_HOST}
@@ -38,7 +38,7 @@ services:
     command: bash -c "composer install"
 
   node:
-    image: node:8-slim
+    image: node:8
     depends_on:
     - composer
     volumes:
