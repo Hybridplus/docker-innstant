@@ -1,5 +1,6 @@
 #! /bin/sh
-docker container stop docker-innstant4_node_1
-docker container stop docker-innstant4_web_1
-docker rm docker-innstant4_node_1
-docker rm docker-innstant4_web_1
+docker container stop node
+docker container stop innstant4
+docker rm node
+docker rm innstant4
+docker rm composer-i
