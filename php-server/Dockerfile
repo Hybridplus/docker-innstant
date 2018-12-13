@@ -1,21 +1,17 @@
-FROM php:7.0.32-apache
+FROM ubuntu:16.04
 
-RUN docker-php-ext-install \
-	pdo_mysql \
-	&& a2enmod rewrite \
-	&& echo "ServerName localhost" >> /etc/apache2/apache2.conf \
-	&& usermod -u 1000 www-data \
-	&& usermod -G staff www-data \
-	&& echo "deb http://ftp.de.debian.org/debian stretch main " > /etc/apt/sources.list \
-	&& apt-get update \
-	&& apt-get install -y libyaml-dev \
-	&& apt-get install -y nano unzip curl --allow-downgrades g++ \
-	&& apt-get -y update \
-    && apt-get install -y libicu-dev \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install intl \
-	&& pecl install xdebug-2.6.0 \
-	&& pecl install yaml-2.0.0 \
-	&& docker-php-ext-enable xdebug yaml \
-    && apt-get install -y libfontconfig1 libxrender1 libssl1.0-dev wkhtmltopdf\
-	&& apt-get clean
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    apache2 apache2-dev \
+    && apt-get install -y nano mc htop unzip php-xml php7.0-mbstring php7.0-zip php-dev \
+       libyaml-dev php-curl libfontconfig libxrender-dev php-memcached memcached php-intl \
+       libapache2-mod-php\
+    && pecl install yaml-2.0.0 && pecl install xdebug-2.6.0 \
+    && a2enmod rewrite \
+    && echo "ServerName localhost" >> /etc/apache2/apache2.conf \
+    && usermod -u 1000 www-data \
+    && usermod -G staff www-data
+
+COPY apache2-foreground /usr/local/bin
+
+EXPOSE 80
+CMD ["apache2-foreground"]
