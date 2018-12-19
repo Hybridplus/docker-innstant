@@ -55,7 +55,7 @@ services:
     - type: bind
       source: ./src/innstant4
       target: /var/www/innstant4/
-    working_dir: /var/www/innstant4/
+    working_dir: /var/www/innstant4
     command: bash -c "composer install"
 
   node:
