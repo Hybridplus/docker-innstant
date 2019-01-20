@@ -8,7 +8,7 @@ echo    - static-data:import
 printf "php artisan "
 read command
 
-echo artisan ${command}
+echo php artisan ${command}
 docker exec innstant4 php artisan ${command}
 
 printf "\n\n\nFINISH\n"
