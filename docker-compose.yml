@@ -14,7 +14,7 @@ services:
       target: /etc/apache2/sites-enabled/innstant.me.conf
     - type: bind
       source: ./config/php/php.ini-development
-      target: /usr/local/etc/php/php.ini
+      target: /etc/php/7.0/apache2/php.ini
     - type: bind
       source: ./config/xdebug/docker-php-ext-xdebug.ini
       target: /etc/php/7.0/apache2/conf.d/20-xdebug.ini
@@ -60,7 +60,7 @@ services:
 
   node:
     image: node:8-slim
-    container_name: node
+    container_name: node-i
     depends_on:
     - composer
     volumes:
