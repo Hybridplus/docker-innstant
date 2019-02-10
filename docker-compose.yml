@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   web:
-    build: ./php-server
+    build: services/php-server
     container_name: innstant4
     environment:
     - APACHE_RUN_USER=www-data
@@ -49,7 +49,7 @@ services:
       - aether3:aether3
 
   composer:
-    build: ./composer
+    build: services/composer
     container_name: composer-i
     volumes:
     - type: bind
@@ -59,7 +59,7 @@ services:
     command: bash -c "composer install"
 
   node:
-    image: node:8-slim
+    build: services/node
     container_name: node-i
     depends_on:
     - composer
@@ -67,8 +67,11 @@ services:
     - type: bind
       source: ./src/innstant4
       target: /var/www/innstant4/
+    - type: bind
+      source: ./logs/node-logs
+      target: /root/.npm/_logs
     working_dir: /var/www/innstant4/
-    command: bash -c "npm install && npm run watch"
+    command: bash -c "npm install --production=false && npm run watch"
 
 networks:
   frontend:
