@@ -73,7 +73,16 @@ services:
     working_dir: /var/www/innstant4/
     command: bash -c "npm install --production=false && npm run watch"
 
+  beanstalkd :
+    image: schickling/beanstalkd
+    container_name: beanstalkd
+    ports:
+      - 11300:11300
+    networks:
+      frontend:
+        ipv4_address: 172.16.238.99
+
 networks:
   frontend:
     external:
-      name : docker-aether3_backend
+      name : dockeraether3_backend
