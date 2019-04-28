@@ -36,6 +36,9 @@ services:
     - type: bind
       source: ./logs/apache-logs
       target: /var/log/apache2
+    - type: bind
+      source: ./config/supervisor/conf.d
+      target: /etc/supervisor/conf.d/
     ports:
     - 80:80
     networks:
