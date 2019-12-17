@@ -6,12 +6,21 @@ services:
     environment:
     - APACHE_RUN_USER=www-data
     volumes:
+    #bind source
     - type: bind
       source: ./src/innstant4
       target: /var/www/innstant4/
+    #bind apache configs
     - type: bind
       source: ./config/sites-enabled/innstant.me.conf
       target: /etc/apache2/sites-enabled/innstant.me.conf
+    - type: bind
+      source: ./config/mods/proxy.conf
+      target: /etc/apache2/mods-available/proxy.conf
+    - type: bind
+      source: ./config/mods/proxy.conf
+      target: /etc/apache2/mods-available/proxy.conf
+    #bind php configs
     - type: bind
       source: ./config/php/php.ini-development
       target: /etc/php/7.0/apache2/php.ini
@@ -34,8 +43,19 @@ services:
       source: ./config/yaml/yaml.ini
       target: /etc/php/7.0/mods-available/yaml.ini
     - type: bind
+      source: ./config/ev/ev.ini
+      target: /etc/php/7.0/mods-available/ev.ini
+    - type: bind
+      source: ./config/ev/ev.ini
+      target: /etc/php/7.0/apache2/conf.d/20-ev.ini
+    - type: bind
+      source: ./config/ev/ev.ini
+      target: /etc/php/7.0/cli/conf.d/ev.ini
+    #bind logs folder
+    - type: bind
       source: ./logs/apache-logs
       target: /var/log/apache2
+    #bind supervisor settings
     - type: bind
       source: ./config/supervisor/conf.d
       target: /etc/supervisor/conf.d/
