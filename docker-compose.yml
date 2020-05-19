@@ -10,16 +10,22 @@ services:
     - type: bind
       source: ./src/innstant4
       target: /var/www/innstant4/
+    - type: bind
+      source: ./src/white_labels
+      target: /var/www/white_labels/
     #bind apache configs
     - type: bind
       source: ./config/sites-enabled/innstant.me.conf
       target: /etc/apache2/sites-enabled/innstant.me.conf
     - type: bind
+      source: ./config/sites-enabled/innstant.com.conf
+      target: /etc/apache2/sites-enabled/innstant.com.conf
+    - type: bind
       source: ./config/mods/proxy.conf
       target: /etc/apache2/mods-available/proxy.conf
     - type: bind
       source: ./config/mods/proxy.conf
-      target: /etc/apache2/mods-available/proxy.conf
+      target: /etc/apache2/mods-enabled/proxy.conf
     #bind php configs
     - type: bind
       source: ./config/php/php.ini-development
@@ -61,12 +67,14 @@ services:
       target: /etc/supervisor/conf.d/
     ports:
     - 80:80
+    - 9001:9001
     networks:
       frontend:
         ipv4_address: 172.16.238.15
     working_dir: /var/www/innstant4
     extra_hosts:
     - innstant.me:127.0.0.1
+    - innstant.comm:127.0.0.1
     - aether3.me:172.16.238.10
     external_links:
       - aether3:aether3
@@ -108,4 +116,4 @@ services:
 networks:
   frontend:
     external:
-      name : dockeraether3_backend
+      name : docker-aether3_backend
